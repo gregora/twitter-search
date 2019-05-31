@@ -11,13 +11,21 @@ var search = ['donald', 'your_word_2'];
 
 for (var s in search){
 
-  client.stream('statuses/filter', {track: search[s]}, function(stream) {
+  searchtweets(s);
+
+}
+
+
+function searchtweets(s){
+
+  client.stream('statuses/filter', {track: s}, function(stream) {
     stream.on('data', function(event) {
       console.log(event && event.text);
     });
 
     stream.on('error', function(error) {
       console.log(error);
+      setTimeout(searchtweets, 900000, s)
     });
   });
 
