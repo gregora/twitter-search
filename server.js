@@ -7,14 +7,18 @@ login = JSON.parse(login);
 
 var client = new Twitter(login);
 
-var search = 'your_word';
+var search = ['donald', 'your_word_2'];
 
-client.stream('statuses/filter', {track: search}, function(stream) {
-  stream.on('data', function(event) {
-    console.log(event && event.text);
+for (var s in search){
+
+  client.stream('statuses/filter', {track: search[s]}, function(stream) {
+    stream.on('data', function(event) {
+      console.log(event && event.text);
+    });
+
+    stream.on('error', function(error) {
+      console.log(error);
+    });
   });
 
-  stream.on('error', function(error) {
-    console.log(error);
-  });
-});
+}
