@@ -11,7 +11,7 @@ var search = ['donald', 'your_word_2'];
 
 for (var s in search){
 
-  searchtweets(s);
+  searchtweets(search[s]);
 
 }
 
